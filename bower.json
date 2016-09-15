@@ -1,0 +1,21 @@
+{
+  "name": "concours",
+  "homepage": "https://github.com/florianajir/concours",
+  "authors": [
+    "florianajir <florianajir@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "^6.2.3"
+  }
+}

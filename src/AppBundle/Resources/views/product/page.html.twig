@@ -1,0 +1,94 @@
+{% extends 'layout.html.twig' %}
+{% block breadcrumb %}
+    <ul class="breadcrumbs">
+        <li><a href="/">Home</a></li>
+        <li><a href="{{ path('concours') }}">Concours</a></li>
+        <li>
+            <span class="show-for-sr">Current: </span> Gagner un iPhone 6
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="medium-6 columns">
+            <img class="thumbnail" src="http://placehold.it/650x350">
+            <div class="row small-up-4">
+                <div class="column">
+                    <img class="thumbnail" src="http://placehold.it/250x200">
+                </div>
+                <div class="column">
+                    <img class="thumbnail" src="http://placehold.it/250x200">
+                </div>
+                <div class="column">
+                    <img class="thumbnail" src="http://placehold.it/250x200">
+                </div>
+                <div class="column">
+                    <img class="thumbnail" src="http://placehold.it/250x200">
+                </div>
+            </div>
+        </div>
+        <div class="medium-6 large-5 columns">
+            <h3>iPhone 6</h3>
+            <p>
+                Digne successeur des iPhone 4S, 5C, 5 et 5S, ce haut de gamme Apple est à la pointe grâce à son écran
+                Retina HD.
+                Déverrouillez votre nouvel iPhone 6 à l’aide de votre empreinte pour acheter de la musique, profiter des
+                meilleurs jeux et applications de l’Apple Store!
+            </p>
+
+            <div class="row">
+                <div class="small-2 columns">
+                    <label for="middle-label" class="middle">Mise</label>
+                </div>
+                <div class="small-10 columns">
+                    <div class="small-9 columns">
+                        <div class="slider" id="bet-slider" data-slider data-initial-start="10" data-start="1"
+                             data-end="1000">
+                            <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                                  aria-controls="input-bet-amount"></span>
+                            <span class="slider-fill" data-slider-fill></span>
+                        </div>
+                    </div>
+                    <div class="small-3 columns">
+                        <input type="number" id="input-bet-amount" aria-label="bet amount" min="1" max="1000">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="bet-button" class="button large expanded">Miser ! (<span
+                        id="win-probability">1</span>% chances de
+                gagner)
+            </button>
+
+            <div class="small secondary expanded button-group">
+                <a class="button">Facebook</a>
+                <a class="button">Twitter</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function () {
+            function updateProbability() {
+                var input = $('#input-bet-amount');
+                var button = $('#bet-button');
+                var max = parseInt(input.attr('max'));
+                var value = parseInt(input.val());
+                var probability = 0;
+                if (isNaN(value) || value < 1) {
+                    button.addClass('disabled');
+                } else {
+                    probability = Math.round((value / max) * 100 * 100) / 100;
+                    button.removeClass('disabled');
+                }
+                button.prop('diaabled', probability ==+ 0);
+                $('#win-probability').text(probability);
+            }
+
+            $('#input-bet-amount').on('change keyup', updateProbability);
+            $('#bet-slider').on('moved.zf.slider', updateProbability);
+        });
+    </script>
+{% endblock %}
